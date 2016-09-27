@@ -158,6 +158,7 @@
             this.buConfirm.TabIndex = 27;
             this.buConfirm.Text = "Confirm";
             this.buConfirm.UseVisualStyleBackColor = true;
+            this.buConfirm.Click += new System.EventHandler(this.buConfirm_Click_1);
             // 
             // comboBox1
             // 

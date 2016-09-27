@@ -52,5 +52,10 @@ namespace HotelSimulatie.GUI
             jsonSerializer.Serialize(sw, settings);
             sw.Close();
         }
+
+        private void buConfirm_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

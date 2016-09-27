@@ -10,10 +10,14 @@ namespace HotelSimulatie.Facilities
 {
     class Restaurant : Node
     {
+        public int Capacity { get; set; }
+        public string AreaType { get; set; }
+        public int Position { get; set; }
+        public int Dimention { get; set; }
 
         public Restaurant()
         {
-            //TileImage = Image.FromFile("../../Resources/background.png");
+
         }
     }
 }
