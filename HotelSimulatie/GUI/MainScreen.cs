@@ -16,32 +16,40 @@ namespace HotelSimulatie
 {
     public partial class Form1 : Form
     {
+        SettingsScreen SettingsScreen;
+        FileReader fileReader;
+
         public Form1()
         {
             InitializeComponent();
-
-
+            fileReader = new FileReader();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            SettingsScreen SettingsScreen = new SettingsScreen();
+            SettingsScreen = new SettingsScreen();
             Controls.Add(SettingsScreen);
-            SettingsScreen.BringToFront();
+            SettingsScreen.Visible = false;
+            //SettingsScreen.BringToFront();
 
             Visitor visitor1 = new Visitor();
             Visitor visitor2 = new Visitor();
             Visitor visitor3 = new Visitor();
 
-
-            Graph.Graph graph = new Graph.Graph();
+            //FileReader
+            fileReader.JsonToObject();
+            DGraph graph = new DGraph();
+            
 
             Node lift2Node = new LiftNode() { Naam = "lift2" };
-            Node room2a = new Room() { Naam = "room2a" };
+            room2a = new Room() { Naam = "room2a" };
+            DijkstraNode dnode = new DijkstraNode(room2a);
+
             Node hallwayRoom2a = new Hallway() { Naam = "hallwayRoom2a" };
+
             Node room2b = new Room() { Naam = "room2c" };
             Node hallwayRoom2b = new Hallway() { Naam = "hallwayRoom2b" };
+
             Node room2c = new Room() { Naam = "room2c" };
             Node hallwayRoom2c = new Hallway() { Naam = "hallwayRoom2c" };
             Node stair2 = new Staircase() { Naam = "stair2" };
@@ -137,8 +145,18 @@ namespace HotelSimulatie
             hallwayCinema.Neighbors.Add(cinema, 1);
 
             string pad1 = graph.Dijkstra(room2c, Lobby);
+            Visitor visit = new Visitor();
+            visit.room = room2a;
+            visit.location = Lobby;
+            label1.Text = visit.createPath(visit.room);
             //label8.Text = pad1;
             Console.ReadLine();
+        }
+
+        private void bSettings_Click(object sender, EventArgs e)
+        {
+            SettingsScreen.BringToFront();
+            SettingsScreen.Visible = true;
         }
     }
 

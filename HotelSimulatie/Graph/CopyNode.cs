@@ -6,14 +6,35 @@ using System.Threading.Tasks;
 
 namespace HotelSimulatie.Graph
 {
-    public class DGraph
+    public class CopyNode : Node
     {
-        // we bezoeken de knoop deze, tenzij die eind is.
-        // vervolgens veranderen we deze de kortste knoop tot nu toe en dan zoeken we netzolang totdat het einde is en dan zijn we klaar.
-        List<Node> open = new List<Node>();
-        public string Dijkstra(Node begin, Node eind)
+        private Node startLocation; // Sla eerste node op. BV : Rooma
+        public CopyNode vorige;
+        private int afstand; // is de miljard waarde
+        private Dictionary<CopyNode, int> Neighbors; // sla een kopie van de buur op en met weight. BV : (hallwayRooma, 1), dus precies een copy.
+        public List<CopyNode> open;
+
+
+        public CopyNode(Node _startLocation)
         {
-            Node deze = begin; // waar mee je begint
+            startLocation = _startLocation;
+            Neighbors = new Dictionary<CopyNode, int>();
+            open = new List<CopyNode>();
+            Naam = startLocation.Naam;
+
+            Console.WriteLine(startLocation.Neighbors.Count);
+
+            afstand = int.MaxValue / 2;
+            foreach (KeyValuePair<Node, int> n in startLocation.Neighbors)
+            {
+                Neighbors.Add(new CopyNode(n.Key), n.Value); // maak voor elke buur een copynode, in de parameter wordt de buur dus de originele meegestuurd. 
+            }
+        }
+
+
+        public string Dijkstra(CopyNode begin, Node eind)
+        {
+            CopyNode deze = begin; // waar mee je begint
             while (!Bezoek(deze, eind)) // zolang we niet de eindknoop bezoeken, bezoeken we dus deze, oftewel zolang deze niet de eindknoop is en we gaan hem zoeken gaan we door. Doorgaan betekend : we veranderen deze in de kortste knoop die we tot nu toe hebben.
             {
                 // pak het to nu toe kosrste pad, eerste a + tweede a, previous + derde a, previus plus vierde a, previous plus  vijfde a.
@@ -21,6 +42,7 @@ namespace HotelSimulatie.Graph
             }
             return MakePath(eind); // die maakt die string waarbij die zegt we hebben de pad gevonden en dan moet je die juiste knopen in de juiste volgorde in dat stringetje zetten om op scherm te zetten.
         }
+
         public string MakePath(Node End)
         {
             List<string> stappenPad = new List<string>();
@@ -41,7 +63,7 @@ namespace HotelSimulatie.Graph
             return volledigPad;
         }
 
-        public bool Bezoek(Node deze, Node eind) // knoop deze, de noop die we willen bezoeken en de knoop eind.
+        public bool Bezoek(CopyNode deze, Node eind) // knoop deze, de noop die we willen bezoeken en de knoop eind.
         {
             Console.WriteLine("Ik bezoek knoop : " + deze.Naam);
             // checken op eind, als de knoop deze gelij kis aan de eindknoop. Als we true returnen in de whileloop dan zijn we klaar. Dan kunnen we het korste pad maken en zometeen afdrukken
@@ -55,7 +77,7 @@ namespace HotelSimulatie.Graph
                 open.Remove(deze);
             }
             // Buren aflopen
-            foreach (KeyValuePair<Node, int> x in deze.Neighbors) // Buren van elk knoop aflopen, in dit geval van deze. Dus die halen we eruit.
+            foreach (KeyValuePair<CopyNode, int> x in deze.Neighbors) // Buren van elk knoop aflopen, in dit geval van deze. Dus die halen we eruit.
             {
                 int nieuweAfstand = deze.Afstand + x.Value; // Afstand dat we tot nu toe hebben + waarde die je nodig hebt om tot die knoop te komen.
                 if (nieuweAfstand < x.Key.Afstand) // Als dat korter is dan de afstand die we eventueel al hadden berekend voor x, dan moeten we hem aanpassen. Als de nieuwe afstand die we berekend hebben via de knoop deze, als dat sneller is dan de afstand die x tot nu toe(in hetb egin was die oneindig dus het was altijd zo) had dan moeten we die afstand aanpassen.
@@ -67,5 +89,6 @@ namespace HotelSimulatie.Graph
             }
             return false; // Zodat de whileloop niet eindigd. Bij true wel maar we moeten er nog doorheen.
         }
+
     }
 }

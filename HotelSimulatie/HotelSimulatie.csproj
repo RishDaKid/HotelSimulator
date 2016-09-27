@@ -64,6 +64,9 @@
     <Compile Include="Facilities\Restaurant.cs" />
     <Compile Include="Facilities\Room.cs" />
     <Compile Include="Facilities\Staircase.cs" />
+    <Compile Include="FileReader.cs" />
+    <Compile Include="Graph\CopyNode.cs" />
+    <Compile Include="Graph\DijkstraNode.cs" />
     <Compile Include="Graph\Graph.cs" />
     <Compile Include="Graph\Node.cs" />
     <Compile Include="Graph\Tile.cs" />
