@@ -10,11 +10,6 @@ namespace HotelSimulatie.Facilities
 {
     class Cinema : Node
     {
-        public string AreaType { get; set; }
-        public int Position { get; set; }
-        public int Dimention { get; set; }
-
-
 
         public Cinema()
         {
