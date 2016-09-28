@@ -10,16 +10,15 @@ namespace HotelSimulatie.Facilities
 {
     class Cinema : Node
     {
-        List<Visitor> CurrentWatching;
+        public string AreaType { get; set; }
+        public int Position { get; set; }
+        public int Dimention { get; set; }
 
 
 
         public Cinema()
         {
-            CurrentWatching = new List<Visitor>();
 
-
-            //TileImage = Image.FromFile("../../Resources/background.png");
         }
     }
 }

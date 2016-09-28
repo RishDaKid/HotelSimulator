@@ -12,3 +12,5 @@ namespace HotelSimulatie.Facilities
 
     }
 }
+
+// class gemaakt. die noem je dijkstra node. Die krijgt bij het aanmaken een node. je maakt int afstand. dictionarry buren. buren = new dictionarry. foreach : key.value.

@@ -55,5 +55,10 @@ namespace HotelSimulatie.GUI
             Visible = false;
             WriteFile();
         }
+
+        private void buConfirm_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }
