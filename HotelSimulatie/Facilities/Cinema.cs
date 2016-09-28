@@ -11,9 +11,7 @@ namespace HotelSimulatie.Facilities
     class Cinema : Node
     {
         List<Visitor> CurrentWatching;
-        public string AreaType { get; set; }
-        public int Position { get; set; }
-        public int Dimension { get; set; }
+
 
 
         public Cinema()

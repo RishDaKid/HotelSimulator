@@ -17,7 +17,7 @@ namespace HotelSimulatie.Graph
             while (!Bezoek(deze, eind)) // zolang we niet de eindknoop bezoeken, bezoeken we dus deze, oftewel zolang deze niet de eindknoop is en we gaan hem zoeken gaan we door. Doorgaan betekend : we veranderen deze in de kortste knoop die we tot nu toe hebben.
             {
                 // pak het to nu toe kosrste pad, eerste a + tweede a, previous + derde a, previus plus vierde a, previous plus  vijfde a.
-                deze = open.Aggregate((l, r) => l.Afstand < r.Afstand ? l : r); // we maken deze gelijk aan de knoop in de collectie open die de kleinste afstand heeft. Dat is precies wat we wilde, Dijkstra zij pak de knoop met de tot nu toe de kortste pad en die gaan we bezoeken. 
+                deze = open.Aggregate((l, r) => l.afstand < r.afstand ? l : r); // we maken deze gelijk aan de knoop in de collectie open die de kleinste afstand heeft. Dat is precies wat we wilde, Dijkstra zij pak de knoop met de tot nu toe de kortste pad en die gaan we bezoeken. 
             }
             return MakePath(eind); // die maakt die string waarbij die zegt we hebben de pad gevonden en dan moet je die juiste knopen in de juiste volgorde in dat stringetje zetten om op scherm te zetten.
         }
@@ -57,10 +57,10 @@ namespace HotelSimulatie.Graph
             // Buren aflopen
             foreach (KeyValuePair<Node, int> x in deze.Neighbors) // Buren van elk knoop aflopen, in dit geval van deze. Dus die halen we eruit.
             {
-                int nieuweAfstand = deze.Afstand + x.Value; // Afstand dat we tot nu toe hebben + waarde die je nodig hebt om tot die knoop te komen.
-                if (nieuweAfstand < x.Key.Afstand) // Als dat korter is dan de afstand die we eventueel al hadden berekend voor x, dan moeten we hem aanpassen. Als de nieuwe afstand die we berekend hebben via de knoop deze, als dat sneller is dan de afstand die x tot nu toe(in hetb egin was die oneindig dus het was altijd zo) had dan moeten we die afstand aanpassen.
+                int nieuweAfstand = deze.afstand + x.Value; // Afstand dat we tot nu toe hebben + waarde die je nodig hebt om tot die knoop te komen.
+                if (nieuweAfstand < x.Key.afstand) // Als dat korter is dan de afstand die we eventueel al hadden berekend voor x, dan moeten we hem aanpassen. Als de nieuwe afstand die we berekend hebben via de knoop deze, als dat sneller is dan de afstand die x tot nu toe(in hetb egin was die oneindig dus het was altijd zo) had dan moeten we die afstand aanpassen.
                 {
-                    x.Key.Afstand = nieuweAfstand; // Nieuwe afstand zetten als sneller is
+                    x.Key.afstand = nieuweAfstand; // Nieuwe afstand zetten als sneller is
                     x.Key.Vorige = deze; // Als we een nieuwe afstand moeten berekenen betekend het dat de route via deze naar zijn kind knoop x de snelste route tot nu toe is, en dat willen we onthouden. Dus op dit moment onthouden we van knoop x dat we de snelste route daarna via de knop deze was. Van de knopp x, zijn vorige wordt gelijk aan deze.
                     open.Add(x.Key); // Uiteindelijk moeten we de knoop x nog kunnen bezoeken dus voegen we het toe aan het lijstje zodat als dit tot nu de kortste pad is we die ook kunnen bezoeken.
                 }

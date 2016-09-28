@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 using HotelSimulatie.Model;
 using System.IO;
 
@@ -47,7 +47,7 @@ namespace HotelSimulatie.GUI
             settings.CleaningTimeUnit = Convert.ToInt32(tbCleaning.Text) * Convert.ToInt32(comboBox1.Text);
             settings.CleaningEmergengyTimeUnit = Convert.ToInt32(tbCleaningEmergency.Text) * Convert.ToInt32(comboBox1.Text);
 
-            fileReader.WriteFile(settings);
+            //fileReader.WriteFile(settings);
         }
 
         private void buConfirm_Click_1(object sender, EventArgs e)

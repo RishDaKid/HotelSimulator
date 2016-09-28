@@ -10,7 +10,6 @@ namespace HotelSimulatie.Facilities
 {
     class Restaurant : Node
     {
-
         public Restaurant()
         {
             //TileImage = Image.FromFile("../../Resources/background.png");

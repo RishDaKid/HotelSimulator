@@ -18,10 +18,10 @@ namespace HotelSimulatie.Actors
 
         }
 
-        public string createPath(Node _destination)
+        public string CreatePath(Node _destination)
         {
             CopyNode start = new CopyNode(location);
-            start.Afstand = 0;
+            start.afstand = 0;
             string path = start.Dijkstra(start, _destination);
             return path;
         }

@@ -12,8 +12,14 @@ namespace HotelSimulatie.Graph
        // public Image TileImage { get; set; }
         public Dictionary<Node, int> Neighbors { get; set; }
         public Node Vorige { get; set; }
-        public int Afstand { get; set; } // afstand tot nu toe
+        public int afstand { get; set; } // afstand tot nu toe
         public string Naam { get; set; }
+
+        public int Capacity { get; set; }
+        public string AreaType { get; set; }
+        public object Position { get; set; }
+        public object Dimension { get; set; }
+        public string Classification { get; set; }
 
         public Node()
         {
@@ -21,7 +27,7 @@ namespace HotelSimulatie.Graph
            // TileImage = Image.FromFile("../../Resources/background.png");
 
             Vorige = null; // we hebben nog geen enkel pad gevonden
-            Afstand = Int32.MaxValue / 2; // 
+            afstand = Int32.MaxValue / 2; // 
         }
     }
 }
