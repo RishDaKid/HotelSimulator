@@ -30,7 +30,7 @@ namespace HotelSimulatie
             var obj = JsonConvert.DeserializeObject<dynamic>(text);
 
             //Console.WriteLine(obj[0]["Dimension"].ToString());
-            Console.WriteLine(obj[0]["Dimension"].GetType());
+            //Console.WriteLine(obj[0]["Dimension"].GetType());
 
             foreach (var item in Facilities)
             {
@@ -44,39 +44,31 @@ namespace HotelSimulatie
             foreach (var item in Facilities)
             {
                 //Console.WriteLine(item.Capacity.GetType());
-                switch (item.AreaType)
+
+                // mischien kamers apart houden!!
+                if (item.AreaType.Equals("Cinema"))
                 {
-                    case "Cinema":
-                        Cinema cinema = new Cinema();
-                        cinema.Position = item.Position;
-                        cinema.Dimension = item.Dimension;
-                        facs.Add(cinema);
-                        break;
-                    case "Restaurant":
-                        Restaurant restaurant = new Restaurant();
-                        restaurant.Capacity = item.Capacity;
-                        restaurant.Position = item.Position;
-                        restaurant.Dimension = item.Dimension;
-                        facs.Add(restaurant);
-                            
-                        break;
-                    case "Fitness":
-                        Fitnesscentrum fitnessCentrum = new Fitnesscentrum();
-                        fitnessCentrum.Position = item.Position;
-                        fitnessCentrum.Dimension = item.Dimension;
-                        facs.Add(fitnessCentrum);
-                        break;
-                    case "Room":
-                        Room room = new Room();
-                        room.Classification = item.Classification;
-                        room.Position = item.Position;
-                        room.Dimension = item.Dimension;
-                        facs.Add(room);
-                        break;
-                    default:
-                        Console.WriteLine("Not found"); 
-                        break;
+                    Cinema cinema = new Cinema();
+                    cinema.Position = item.Position;
+                    cinema.Dimension = item.Dimension;
+                    facs.Add(cinema);
                 }
+                else if (item.AreaType.Equals("Restaurant"))
+                {
+                    Restaurant restaurant = new Restaurant();
+                    restaurant.Capacity = item.Capacity;
+                    restaurant.Position = item.Position;
+                    restaurant.Dimension = item.Dimension;
+                    facs.Add(restaurant);
+                }
+                else
+                {
+                    Fitnesscentrum fitnessCentrum = new Fitnesscentrum();
+                    fitnessCentrum.Position = item.Position;
+                    fitnessCentrum.Dimension = item.Dimension;
+                    facs.Add(fitnessCentrum);
+                }
+            }
                 //Debug.WriteLine(item.AreaType);
                 //if (item.AreaType.Equals("Cinema"))
                 //{
@@ -85,6 +77,17 @@ namespace HotelSimulatie
                 //    cinema.Position = item.Position;
 
                 //}
+            foreach (var item in Facilities)
+            {
+                if (item.AreaType.Equals("Room"))
+                {
+                        Room room = new Room();
+                        room.Classification = item.Classification;
+                        room.Position = item.Position;
+                        room.Dimension = item.Dimension;
+                        facs.Add(room);
+                }
+
             }
             Settings settings = JsonConvert.DeserializeObject<Settings>(text);
             //Console.WriteLine(settings.CinemaTimeUnit + " " + settings.RestaurantTimeUnit + " " + settings.StairsTimeUnit + " " + settings.DeathTimeUnit + " " + settings.CleaningTimeUnit + " " + settings.CleaningEmergengyTimeUnit);

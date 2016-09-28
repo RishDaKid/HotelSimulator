@@ -9,6 +9,7 @@ namespace HotelSimulatie.Facilities
 {
     public class Room : Node
     {
+        public int Capacity { get; set; }
 
     }
 }

@@ -15,11 +15,9 @@ namespace HotelSimulatie.Graph
         public int afstand { get; set; } // afstand tot nu toe
         public string Naam { get; set; }
 
-        public int Capacity { get; set; }
-        public string AreaType { get; set; }
-        public object Position { get; set; }
-        public object Dimension { get; set; }
         public string Classification { get; set; }
+        public Point Position { get; set; }
+        public Point Dimension { get; set; }
 
         public Node()
         {
