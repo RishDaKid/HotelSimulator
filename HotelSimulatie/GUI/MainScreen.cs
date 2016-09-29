@@ -18,12 +18,11 @@ namespace HotelSimulatie
     {
         SettingsScreen SettingsScreen;
         private Bitmap WorldBitmap;
-        List<Node> hh;
 
         Node[,] tileArray;
         int maxX;
         int maxY;
-
+        Hotel hotel;
         public Form1()
         {
             InitializeComponent();
@@ -32,9 +31,10 @@ namespace HotelSimulatie
             SettingsScreen.BringToFront();
             SettingsScreen.Visible = false;
             WorldBitmap = new Bitmap(1300, 700);
+            hotel = new Hotel();
 
-            AssembleHotel();
-            DrawTiles();
+
+            DrawTiles(hotel.AssembleHotel());
             this.Paint += Form1_Paint1;
 
             Console.ReadLine();
@@ -49,54 +49,15 @@ namespace HotelSimulatie
         {
         }
 
-        //public void AssignPiecesToTiles(List<Node> facilities)
-        //{
-        //    // Gets Facilities with biggest X and Y Numbers.
-        //    maxX = facilities.Max(x => x.Position.X);
-        //    maxY = facilities.Max(x => x.Position.Y);
-
-        //    //tileArray = new Node[maxX + 1, maxY + 1];
-
-        //    //foreach (var item in facilities)
-        //    //{
-        //    //    tileArray[item.Position.X, item.Position.Y] = item;
-        //    //}
-
-        //    //// testing purpose
-        //    //for (int x = 0; x < maxX; x++)
-        //    //{
-        //    //    for (int y = 0; y < maxY; y++)
-        //    //    {
-        //    //        if (tileArray[x, y] != null)
-        //    //        {
-        //    //            Console.WriteLine(tileArray[x, y].Naam);
-        //    //        }
-        //    //        else
-        //    //        {
-        //    //            tileArray[x, y] = new Empty();
-        //    //            Console.WriteLine("Empty");
-        //    //        }
-        //    //    }
-        //    //}
-        //}
-
-
-        private void DrawTiles()
+        private void DrawTiles(List<Node> places)
         {
-            foreach (var item in collection)
+            foreach (var item in places)
             {
                 using (Graphics Canvas = Graphics.FromImage(WorldBitmap))
                 {
-                    Canvas.DrawImage(tileArray[x, y].TileImage, x * 130, y * 50, 130, 50);
+                    Canvas.DrawImage(item.TileImage, item.Position.X * 130, item.Position.Y * 50, 130, 50);
                 }
             }
-        }
-
-        public void AssembleHotel()
-        {
-            Hotel hotel = new Hotel();
-            hh = hotel.creatHotel();
-            //AssignPiecesToTiles();
         }
 
         private void bSettings_Click(object sender, EventArgs e)

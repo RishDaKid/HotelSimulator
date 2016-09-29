@@ -12,51 +12,69 @@ namespace HotelSimulatie
 {
     class Hotel
     {
-        private FileReader fileReader;
-
-
-        public Hotel()
+        public List<Node> AssembleHotel()
         {
-            fileReader = new FileReader();
-            creatHotel();
-        }
-
-        public List<Node> creatHotel()
-        {
-            fileReader.ReadLayoutFile();
-
-            // Hotel 
-            List<Node> Hotel = new List<Node>();
+            #region Create objects from the list of model facilities
+            FileReader fileReader = new FileReader();
+            List<Facility> facilitiesModels = fileReader.ReadLayoutFile();
 
 
+            List<Node> facilities = new List<Node>();
+            List<Node> rooms = new List<Node>();
 
-            // Lobby
+            // Haal alle faciliteiten uit de model list van faciliteiten 
+            foreach (var item in facilitiesModels)
+            {
+                if (item.AreaType.Equals("Cinema"))
+                {
+                    Cinema cinema = new Cinema();
+                    cinema.Position = item.Position;
+                    cinema.Dimension = item.Dimension;
+                    facilities.Add(cinema);
+                }
+                else if (item.AreaType.Equals("Restaurant"))
+                {
+                    Restaurant restaurant = new Restaurant();
+                    restaurant.Capacity = item.Capacity;
+                    restaurant.Position = item.Position;
+                    restaurant.Dimension = item.Dimension;
+                    facilities.Add(restaurant);
+                }
+                else if (item.AreaType.Equals("Room"))
+                {
+                    Room room = new Room();
+                    room.Position = item.Position;
+                    room.Dimension = item.Dimension;
+                    room.Classification = item.Classification;
+                    rooms.Add(room);
+                }
+                else
+                {
+                    Fitnesscentrum fitnessCentrum = new Fitnesscentrum();
+                    fitnessCentrum.Position = item.Position;
+                    fitnessCentrum.Dimension = item.Dimension;
+                    facilities.Add(fitnessCentrum);
+                }
+            }
+            #endregion
+
+            #region Handmatig toevoegen hier:
+            // 7, 5 is het eerste vakje rechtsonder
             Lobby lobby = new Lobby();
-
-            // Facilities
-            List<Node> Facilities = fileReader.FacilitiesFromFile;
-
-            // rooms
-            List<Node> rooms = fileReader.RoomsFromFile;
+            Point point = new Point(7, 4);
+            lobby.Position = point;
+            facilities.Add(lobby);
+            #endregion
 
 
-
-            // Place Facilities in Hotel
             foreach (var item in rooms)
             {
-                Hotel.Add(item);
+                facilities.Add(item);
             }
 
-            // Place Rooms in Hotel
-            foreach (var item in Facilities)
-            {
-                Hotel.Add(item);
-            }
+            // Voeg de plekken die je handmatig hebt aangemaakt toe aan de lijst
 
-            // Place Lobby in Hotel
-            Hotel.Add(lobby);
-
-            return Hotel;
+            return facilities;
         }
     }
 }
