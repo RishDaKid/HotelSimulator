@@ -17,49 +17,57 @@ namespace HotelSimulatie
     public partial class Form1 : Form
     {
         SettingsScreen SettingsScreen;
-        FileReader fileReader;
+        private Bitmap WorldBitmap;
 
+        Node[,] tileArray;
+        int maxX;
+        int maxY;
+        Hotel hotel;
         public Form1()
         {
             InitializeComponent();
-            fileReader = new FileReader();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-            //fileReader.ReadLayout();
-
-            SettingsScreen SettingsScreen = new SettingsScreen();
+            SettingsScreen = new SettingsScreen();
             Controls.Add(SettingsScreen);
+            SettingsScreen.BringToFront();
+            SettingsScreen.Visible = false;
+            WorldBitmap = new Bitmap(1300, 700);
+            hotel = new Hotel();
 
-            Room room2a = new Room() { Naam = "room2a" };
-            Node hallwayRoom2b = new Hallway() { Naam = "hallwayRoom2b" };
-            Node hallwayRoom2a = new Hallway() { Naam = "hallwayRoom2a" };
 
-            // remove
-            Node hallwayRoom2c = new Hallway() { Naam = "hallwayRoom2b" };
-
-            room2a.Neighbors.Add(hallwayRoom2a, 10); //1 voor in en uit stappen, 1 voor naar de gang te lopen.
-
-            room2a.Neighbors.Add(hallwayRoom2c, 5);
-
-            
-            hallwayRoom2a.Neighbors.Add(hallwayRoom2b, 20);
-            //hallwayRoom2b.Neighbors.Add(hallwayRoom2a, 1);
-
-            Visitor visit = new Visitor();
-            //visit.room = room2a;
-            visit.location = room2a;
-            label1.Text = visit.CreatePath(hallwayRoom2b); // stuur destinatie mee. 
+            DrawTiles(hotel.AssembleHotel());
+            this.Paint += Form1_Paint1;
 
             Console.ReadLine();
         }
 
+        private void Form1_Paint1(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(WorldBitmap, new Point(7, 7));
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void DrawTiles(List<Node> places)
+        {
+            foreach (var item in places)
+            {
+                using (Graphics Canvas = Graphics.FromImage(WorldBitmap))
+                {
+                    Canvas.DrawImage(item.TileImage, item.Position.X * 130, item.Position.Y * 50, 130, 50);
+                }
+            }
+        }
+
         private void bSettings_Click(object sender, EventArgs e)
         {
-            SettingsScreen.BringToFront();
             SettingsScreen.Visible = true;
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

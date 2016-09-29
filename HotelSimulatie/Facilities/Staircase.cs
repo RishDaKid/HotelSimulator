@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HotelSimulatie.Graph;
 using HotelSimulatie.Actors;
+using System.Drawing;
 
 namespace HotelSimulatie.Facilities
 {
@@ -15,7 +16,7 @@ namespace HotelSimulatie.Facilities
         {
             Guests = new List<Visitor>();
 
-            //TileImage = Image.FromFile("../../Resources/background.png");
+            TileImage = Image.FromFile("../../Resources/lobby.png");
         }
     }
 }

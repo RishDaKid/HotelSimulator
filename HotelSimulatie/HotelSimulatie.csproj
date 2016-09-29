@@ -56,6 +56,8 @@
     <Compile Include="Actors\Visitor.cs" />
     <Compile Include="Facilities\Cinema.cs" />
     <Compile Include="Facilities\Elevator.cs" />
+    <Compile Include="Facilities\Empty.cs" />
+    <Compile Include="Hotel.cs" />
     <Compile Include="Model\Facility.cs" />
     <Compile Include="Facilities\Fitnesscentrum.cs" />
     <Compile Include="Facilities\Hallway.cs" />
