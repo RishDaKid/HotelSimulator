@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HotelSimulatie.Graph;
 using HotelSimulatie.Actors;
+using System.Drawing;
 
 namespace HotelSimulatie.Facilities
 {
@@ -13,7 +14,7 @@ namespace HotelSimulatie.Facilities
 
         public Cinema()
         {
-
+            TileImage = Image.FromFile("../../Resources/cinema.png");
         }
     }
 }

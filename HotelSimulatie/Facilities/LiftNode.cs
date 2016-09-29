@@ -15,7 +15,6 @@ namespace HotelSimulatie.Facilities
         public LiftNode()
         {
             Guests = new List<Visitor>();
-            //TileImage = Image.FromFile("../../Resources/background.png");
         }
     }
 }

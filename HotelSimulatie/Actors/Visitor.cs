@@ -13,7 +13,7 @@ namespace HotelSimulatie.Actors
         public Node location;
         public Room room;
 
-        public string createPath(Node _destination) // waar gast naar toe moet, hallwayroomb
+        public string CreatePath(Node _destination) // waar gast naar toe moet, hallwayroomb
         {
             CopyNode start = new CopyNode(location); // rooma
             start.afstand = 0;

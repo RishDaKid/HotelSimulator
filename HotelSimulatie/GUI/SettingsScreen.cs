@@ -50,15 +50,20 @@ namespace HotelSimulatie.GUI
             //fileReader.WriteFile(settings);
         }
 
-        private void buConfirm_Click_1(object sender, EventArgs e)
+        private void bConfirm_Click_1(object sender, EventArgs e)
         {
             Visible = false;
             WriteFile();
         }
 
-        private void buConfirm_Click_1(object sender, EventArgs e)
+        private void bCancel_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Visible = false;
         }
+
+        //private void buConfirm_Click_1(object sender, EventArgs e)
+        //{
+        //    this.Hide();
+        //}
     }
 }
