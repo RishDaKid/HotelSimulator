@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HotelSimulatie.Graph;
+using System.Drawing;
 
 namespace HotelSimulatie.Facilities
 {
@@ -11,7 +12,7 @@ namespace HotelSimulatie.Facilities
     {
         public Fitnesscentrum()
         {
-            //TileImage = Image.FromFile("../../Resources/background.png");
+            TileImage = Image.FromFile("../../Resources/fitness.png");
         }
     }
 }

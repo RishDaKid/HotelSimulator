@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HotelSimulatie.Graph;
+using System.Drawing;
 
 namespace HotelSimulatie.Facilities
 {
     public class Room : Node
     {
-        public int Classification { get; set; }
-
+        public string Classification { get; set; }
+        public Room()
+        {
+            TileImage = Image.FromFile("../../Resources/room.png");
+        }
     }
 }
 

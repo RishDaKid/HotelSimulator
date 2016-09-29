@@ -9,12 +9,11 @@ namespace HotelSimulatie.Graph
 {
     public abstract class Node
     {
-       // public Image TileImage { get; set; }
+        public Image TileImage { get; set; }
         public Dictionary<Node, int> Neighbors { get; set; }
         public Node Vorige { get; set; }
         public string Naam { get; set; }
 
-        public string Classification { get; set; }
         public Point Position { get; set; }
         public Point Dimension { get; set; }
 
