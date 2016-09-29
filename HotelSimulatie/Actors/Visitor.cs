@@ -13,11 +13,11 @@ namespace HotelSimulatie.Actors
         public Node location;
         public Room room;
 
-        public string createPath(Node _destination) // waar gast naar toe moet, hallwayroomb
+        public string CreatePath(Node _destination) // waar gast naar toe moet, hallwayroomb
         {
-            CopyNode start = new CopyNode(location); // rooma
-            start.afstand = 0;
-            string path = start.Dijkstra(start, _destination);
+            CopyNode startLocation = new CopyNode(location); // rooma
+            startLocation.afstand = 0;
+            string path = startLocation.Dijkstra(startLocation, _destination);
             return path;
         }
     }

@@ -20,17 +20,30 @@ namespace HotelSimulatie.Graph
             CopyNodeNeighbor = new Dictionary<CopyNode, int>();
             open = new List<CopyNode>();
             Naam = startLocation.Naam;
-
+           
             afstand = int.MaxValue / 2;
             foreach (KeyValuePair<Node, int> n in startLocation.Neighbors)
             {
-                //if(CopyNodeNeighbor.Add())
-                CopyNodeNeighbor.Add(new CopyNode(n.Key), n.Value); // maak voor elke buur een copynode, in de parameter wordt de buur dus de originele meegestuurd. 
-
+                CopyNodeNeighbor.Add(new CopyNode(n.Key, this), n.Value); 
             }
-            //Console.WriteLine(startLocation.Neighbors.Count);
         }
 
+        public CopyNode(Node _startLocation, CopyNode vorige)
+        {
+            startLocation = _startLocation;
+            CopyNodeNeighbor = new Dictionary<CopyNode, int>();
+            open = new List<CopyNode>();
+            Naam = startLocation.Naam;
+            afstand = int.MaxValue / 2;
+
+            foreach (KeyValuePair<Node, int> n in _startLocation.Neighbors)
+            {
+                if (n.Key != vorige.startLocation)
+                {
+                    CopyNodeNeighbor.Add(new CopyNode(n.Key, this), n.Value);
+                }
+            }
+        }
 
         public string Dijkstra(CopyNode begin, Node eind)
         {

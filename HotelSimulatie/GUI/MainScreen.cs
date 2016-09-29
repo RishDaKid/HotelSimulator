@@ -38,14 +38,15 @@ namespace HotelSimulatie
             Node hallwayRoom2a = new Hallway() { Naam = "hallwayRoom2a" };
 
             // remove
-            Node hallwayRoom2c = new Hallway() { Naam = "hallwayRoom2b" };
+            //Node hallwayRoom2c = new Hallway() { Naam = "hallwayRoom2b" };
 
-            room2a.Neighbors.Add(hallwayRoom2a, 10); //1 voor in en uit stappen, 1 voor naar de gang te lopen.
+            room2a.Neighbors.Add(hallwayRoom2a, 1); //1 voor in en uit stappen, 1 voor naar de gang te lopen.
+            hallwayRoom2a.Neighbors.Add(room2a, 1); //1 voor in en uit stappen, 1 voor naar de gang te lopen.
 
-            room2a.Neighbors.Add(hallwayRoom2c, 5);
+            //room2a.Neighbors.Add(hallwayRoom2c, 5);
 
-            
-            hallwayRoom2a.Neighbors.Add(hallwayRoom2b, 20);
+
+            hallwayRoom2a.Neighbors.Add(hallwayRoom2b, 1);
             //hallwayRoom2b.Neighbors.Add(hallwayRoom2a, 1);
 
             Visitor visit = new Visitor();

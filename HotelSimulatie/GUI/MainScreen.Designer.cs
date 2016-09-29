@@ -35,7 +35,7 @@
             // bSettings
             // 
             this.bSettings.Location = new System.Drawing.Point(9, 380);
-            this.bSettings.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bSettings.Margin = new System.Windows.Forms.Padding(2);
             this.bSettings.Name = "bSettings";
             this.bSettings.Size = new System.Drawing.Size(100, 37);
             this.bSettings.TabIndex = 0;
@@ -46,7 +46,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(250, 191);
+            this.label1.Location = new System.Drawing.Point(428, 112);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 1;

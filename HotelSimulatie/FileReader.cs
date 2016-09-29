@@ -82,7 +82,7 @@ namespace HotelSimulatie
                 if (item.AreaType.Equals("Room"))
                 {
                         Room room = new Room();
-                        room.Classification = item.Classification;
+                        //room.Classification = item.Classification;
                         room.Position = item.Position;
                         room.Dimension = item.Dimension;
                         facs.Add(room);
