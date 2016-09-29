@@ -49,6 +49,14 @@ namespace HotelSimulatie
                     restaurant.Dimension = item.Dimension;
                     FacilitiesFromFile.Add(restaurant);
                 }
+                else if (item.AreaType.Equals("Room"))
+                {
+                    Room room = new Room();
+                    room.Position = item.Position;
+                    room.Dimension = item.Dimension;
+                    room.Classification = item.Classification;
+                    RoomsFromFile.Add(room);
+                }
                 else
                 {
                     Fitnesscentrum fitnessCentrum = new Fitnesscentrum();
@@ -57,20 +65,6 @@ namespace HotelSimulatie
                     FacilitiesFromFile.Add(fitnessCentrum);
                 }
             }
-
-            // Haal alle rooms uit de model list van faciliteiten 
-            foreach (var item in Facilities)
-            {
-                if (item.AreaType.Equals("Room"))
-                {
-                    Room room = new Room();
-                    room.Position = item.Position;
-                    room.Dimension = item.Dimension;
-                    room.Classification = item.Classification;
-                    RoomsFromFile.Add(room);
-                }
-            }
-
             //return FacilitiesFromFile;
             //return RoomsFromFile;
         }
@@ -85,7 +79,7 @@ namespace HotelSimulatie
 
         public void WriteFile(Settings settings)
         {
-            StreamWriter sw = new StreamWriter(@"../../Settings.json");
+            StreamWriter sw = new StreamWriter(@"../../settings.json");
             jsonSerializer.Serialize(sw, settings);
             sw.Close();
         }
