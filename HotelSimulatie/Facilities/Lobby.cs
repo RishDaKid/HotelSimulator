@@ -10,9 +10,12 @@ namespace HotelSimulatie.Facilities
 {
     class Lobby : Node
     {
+        private List<Node> rooms;
 
-        public Lobby()
+        public Lobby(List<Node> _rooms)
         {
+            rooms = new List<Node>();
+            rooms = _rooms;
             //List<Human> // Hangt af of we een rij nodig hebben
             TileImage = Image.FromFile("../../Resources/lobby.png");
         }
