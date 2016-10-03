@@ -160,9 +160,9 @@
             // 
             // bConfirm
             // 
-            this.bConfirm.Location = new System.Drawing.Point(24, 369);
+            this.bConfirm.Location = new System.Drawing.Point(22, 369);
             this.bConfirm.Name = "bConfirm";
-            this.bConfirm.Size = new System.Drawing.Size(100, 37);
+            this.bConfirm.Size = new System.Drawing.Size(62, 37);
             this.bConfirm.TabIndex = 27;
             this.bConfirm.Text = "Bevestig";
             this.bConfirm.UseVisualStyleBackColor = true;
@@ -182,9 +182,9 @@
             // 
             // bCancel
             // 
-            this.bCancel.Location = new System.Drawing.Point(130, 369);
+            this.bCancel.Location = new System.Drawing.Point(90, 369);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(100, 37);
+            this.bCancel.Size = new System.Drawing.Size(59, 37);
             this.bCancel.TabIndex = 29;
             this.bCancel.Text = "Annuleer";
             this.bCancel.UseVisualStyleBackColor = true;
@@ -211,7 +211,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "SettingsScreen";
-            this.Size = new System.Drawing.Size(902, 429);
+            this.Size = new System.Drawing.Size(174, 429);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,80 +1,148 @@
 ﻿using HotelSimulatie.Actors;
 using HotelSimulatie.Facilities;
-using HotelSimulatie.Graph;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelSimulatie.Factory;
+using System.Windows.Forms;
 
 namespace HotelSimulatie
 {
     class Hotel
     {
-        public List<Node> AssembleHotel()
+        private List<LocationType> facilities;
+        private List<LocationType> rooms;
+        private Point hotelPosition;
+        private int heightHotel;
+        private int widthHotel;
+
+        public int _heightHotel { get { return heightHotel; } set { } }
+        public int _widthHotel { get { return widthHotel; } set { } }
+        public Point _hotelPosition { get { return hotelPosition; } set { } }
+        public List<LocationType> _facilities
         {
-            #region Create objects from the list of model facilities
+            get { return facilities; }
+            set { }
+        }
+        public List<LocationType> _rooms
+        {
+            get { return rooms; }
+            set { }
+        }
+
+        public Hotel()
+        {
+            hotelPosition = new Point(160, 182);
+            heightHotel = 834;
+            widthHotel = 1600;
+            facilities = new List<LocationType>();
+            rooms = new List<LocationType>();
+            CreateFactorys();
+        }
+
+        public void CreateFactorys()
+        {
+            ConcreteLocationTypeFactory concreteLocationTypeFactory = new ConcreteLocationTypeFactory();
+            MovableFactory movableFactory = new MovableFactory();
+            movableFactory.RegisterFactory("AreaType", concreteLocationTypeFactory);
+            CreateFactoryObjects(movableFactory);
+        }
+
+        public void CreateFactoryObjects(MovableFactory movableFactory)
+        {
+            // Create Objects with facility model
             FileReader fileReader = new FileReader();
             List<Facility> facilitiesModels = fileReader.ReadLayoutFile();
 
-
-            List<Node> facilities = new List<Node>();
-            List<Node> rooms = new List<Node>();
-
-            // Haal alle faciliteiten uit de model list van faciliteiten 
             foreach (var item in facilitiesModels)
             {
                 if (item.AreaType.Equals("Cinema"))
                 {
-                    Cinema cinema = new Cinema();
-                    cinema.Position = item.Position;
-                    cinema.Dimension = item.Dimension;
-                    facilities.Add(cinema);
+                    Cinema locationType = movableFactory.Create("AreaType",item.AreaType) as Cinema;
+                    locationType.AreaType = item.AreaType;
+                    locationType.Position = item.Position;
+                    locationType.Dimension = item.Dimension;
+                    facilities.Add(locationType);
                 }
                 else if (item.AreaType.Equals("Restaurant"))
                 {
-                    Restaurant restaurant = new Restaurant();
-                    restaurant.Capacity = item.Capacity;
-                    restaurant.Position = item.Position;
-                    restaurant.Dimension = item.Dimension;
-                    facilities.Add(restaurant);
+                    Restaurant locationType = movableFactory.Create("AreaType", item.AreaType) as Restaurant;
+                    locationType.AreaType = item.AreaType;
+                    locationType.Capacity = item.Capacity;
+                    locationType.Position = item.Position;
+                    locationType.Dimension = item.Dimension;
+                    facilities.Add(locationType);
                 }
                 else if (item.AreaType.Equals("Room"))
                 {
-                    Room room = new Room();
-                    room.Position = item.Position;
-                    room.Dimension = item.Dimension;
-                    room.Classification = item.Classification;
-                    rooms.Add(room);
+                    Room locationType = movableFactory.Create("AreaType", item.AreaType) as Room;
+                    locationType.AreaType = item.AreaType;
+                    locationType.Position = item.Position;
+                    locationType.Dimension = item.Dimension;
+                    locationType.Classification = item.Classification;
+                    facilities.Add(locationType);
                 }
-                else
+                else if (item.AreaType.Equals("Fitness"))
                 {
-                    Fitnesscentrum fitnessCentrum = new Fitnesscentrum();
-                    fitnessCentrum.Position = item.Position;
-                    fitnessCentrum.Dimension = item.Dimension;
-                    facilities.Add(fitnessCentrum);
+                    Fitnesscentrum locationType = movableFactory.Create("AreaType", item.AreaType) as Fitnesscentrum;
+                    locationType.AreaType = item.AreaType;
+                    locationType.Position = item.Position;
+                    locationType.Dimension = item.Dimension;
+                    facilities.Add(locationType);
                 }
             }
-            #endregion
 
-            #region Handmatig toevoegen hier:
-            // 7, 5 is het eerste vakje rechtsonder
-            Lobby lobby = new Lobby();
-            Point point = new Point(7, 4);
-            lobby.Position = point;
+
+            // Create Objects which are not facility models
+            Lobby lobby = movableFactory.Create("AreaType","Lobby") as Lobby;
+            lobby.AreaType = "Lobby";
+            lobby.Position = new Point(1, 0);
+            lobby.Dimension = new Point(8, 1);
             facilities.Add(lobby);
-            #endregion
 
+            int etageStair = 0;
+            for (int i = 0; i < 7; i++)
+            {
+                Staircase stairCase = movableFactory.Create("AreaType", "Staircase") as Staircase;
+                stairCase.AreaType = "Staircase";
+                stairCase.Position = new Point(9, etageStair);
+                stairCase.Dimension = new Point(1, 1);
+                facilities.Add(stairCase);
+                etageStair++;
+            }
+
+            int etageElevator = 0;
+            for (int i = 0; i < 7; i++)
+            {
+                ElevatorHall elevatorHall = movableFactory.Create("AreaType", "ElevatorHall") as ElevatorHall;
+                elevatorHall.AreaType = "ElevatorHall";
+                elevatorHall.Position = new Point(0, etageElevator);
+                elevatorHall.Dimension = new Point(1, 1);
+                facilities.Add(elevatorHall);
+                etageElevator++;
+            }
+
+            Elevator elevator = movableFactory.Create("AreaType", "Elevator") as Elevator;
+            elevator.AreaType = "Elevator";
+            elevator.Position = new Point(0, 0);
+            elevator.Dimension = new Point(1, 1);
+            facilities.Add(elevator);
+            etageElevator++;
 
             foreach (var item in rooms)
             {
                 facilities.Add(item);
             }
-
-            // Voeg de plekken die je handmatig hebt aangemaakt toe aan de lijst
-
-            return facilities;
         }
+
+        public void LinkLocationTypes()
+        {
+
+        }
+
     }
 }
+// http://www.gdunlimited.net/forums/gallery/image/1535-sc-door-jp01-png/

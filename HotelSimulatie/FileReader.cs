@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using HotelSimulatie.Model;
-using HotelSimulatie.Graph;
 using System.Diagnostics;
 using HotelSimulatie.Facilities;
 
@@ -30,20 +29,20 @@ namespace HotelSimulatie
             return Facilities;
         }
 
-        public Settings GetSettings()
-        {
-            string text = File.ReadAllText(@"../../settings.json");
-            Settings settings = JsonConvert.DeserializeObject<Settings>(text);
-            //Console.WriteLine(settings.CinemaTimeUnit + " " + settings.RestaurantTimeUnit + " " + settings.StairsTimeUnit + " " + settings.DeathTimeUnit + " " + settings.CleaningTimeUnit + " " + settings.CleaningEmergengyTimeUnit);
-            return settings;
-        }
+        //public Settings GetSettings()
+        //{
+        //    string text = File.ReadAllText(@"../../settings.json");
+        //    Settings settings = JsonConvert.DeserializeObject<Settings>(text);
+        //    //Console.WriteLine(settings.CinemaTimeUnit + " " + settings.RestaurantTimeUnit + " " + settings.StairsTimeUnit + " " + settings.DeathTimeUnit + " " + settings.CleaningTimeUnit + " " + settings.CleaningEmergengyTimeUnit);
+        //    return settings;
+        //}
 
-        public void WriteFile(Settings settings)
-        {
-            StreamWriter sw = new StreamWriter(@"../../settings.json");
-            jsonSerializer.Serialize(sw, settings);
-            sw.Close();
-        }
+        //public void WriteFile(Settings settings)
+        //{
+        //    StreamWriter sw = new StreamWriter(@"../../settings.json");
+        //    jsonSerializer.Serialize(sw, settings);
+        //    sw.Close();
+        //}
     }
 }
 

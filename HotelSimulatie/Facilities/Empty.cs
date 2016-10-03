@@ -1,5 +1,4 @@
-﻿using HotelSimulatie.Graph;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -8,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace HotelSimulatie.Facilities
 {
-    class Empty : Node 
+    class Empty : LocationType
     {
         public Empty()
         {
-            TileImage = Image.FromFile("../../Resources/empty.png");
+            Image = Image.FromFile("../../Resources/empty.png");
         }
     }
 }
