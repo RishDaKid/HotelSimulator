@@ -37,6 +37,9 @@ namespace HotelSimulatie.GUI
             WriteFile();
         }
 
+        /// <summary>
+        /// Schrijft de ingevulde gegevens naar een settings bestand.
+        /// </summary>
         private void WriteFile()
         {
             Settings settings = new Settings();
@@ -52,8 +55,8 @@ namespace HotelSimulatie.GUI
 
         private void bConfirm_Click_1(object sender, EventArgs e)
         {
-            Visible = false;
             WriteFile();
+            Visible = false;
         }
 
         private void bCancel_Click(object sender, EventArgs e)
@@ -61,9 +64,5 @@ namespace HotelSimulatie.GUI
             Visible = false;
         }
 
-        //private void buConfirm_Click_1(object sender, EventArgs e)
-        //{
-        //    this.Hide();
-        //}
     }
 }

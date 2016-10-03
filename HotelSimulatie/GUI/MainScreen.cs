@@ -71,7 +71,7 @@ namespace HotelSimulatie
             {
                 using (Graphics Canvas = Graphics.FromImage(WorldBitmap))
                 {
-                    Canvas.DrawImage(item.Image, item.Position.X * 160, WorldBitmap.Height - (item.Position.Y * 120) - item.Dimension.Y * 120, item.Dimension.X * 160, item.Dimension.Y * 120);
+                    Canvas.DrawImage(item.Image, item.Position.X * 160, item.Position.Y * - 120, item.Dimension.X * 160, item.Dimension.Y * 120);
                 }
             }
             e.Graphics.DrawImage(WorldBitmap, hotel._hotelPosition);
