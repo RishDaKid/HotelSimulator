@@ -23,10 +23,10 @@ namespace HotelSimulatie.Factory
         /// <param name="factoryType">The type of factory to use</param>
         /// <param name="type">The type of <see cref="IMovableThing"/> to create</param>
         /// <returns>A new instance of <see cref="IMovableThing"/>, or null if the parameters are incorrect</returns>
-        public LocationType Create(string factoryType, string type)
+        public LocationType Create(Facility layout)
         {
-            if (_factories.ContainsKey(factoryType))
-                return _factories[factoryType].Create(type);
+            if (_factories.ContainsKey(layout.AreaType))
+                return _factories[layout.AreaType].Create(layout);
 
             return null;
         }

@@ -10,8 +10,9 @@ namespace HotelSimulatie.Facilities
     public class Room : LocationType
     {
         public string Classification { get; set; }
-        public Room()
+        public Room(string _classification)
         {
+            Classification = _classification;
             Image = Image.FromFile("../../Resources/room.png");
         }
     }

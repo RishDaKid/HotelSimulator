@@ -9,6 +9,7 @@ namespace HotelSimulatie.Facilities
 {
     class Lobby : LocationType
     {
+        public int Capacity { get; set; }
 
         public Lobby()
         {

@@ -32,7 +32,7 @@ namespace HotelSimulatie
 
             paper = new ObjectInformationPaper();
             Controls.Add(paper);
-           // paper.BringToFront();
+            // paper.BringToFront();
             paper.Location = new Point(1480, 0);
             paper.Visible = false;
 
@@ -40,29 +40,80 @@ namespace HotelSimulatie
             this.MouseClick += Form1_MouseClick;
 
             this.Paint += Form1_Paint;
-            Console.ReadLine();
-        }
-        int begin;
-        int Dimention;
-        private void Form1_MouseClick(object sender, MouseEventArgs e)
-        {
-            begin = 0;
-            Dimention = 160;
-            begin = e.Location.X - hotel._hotelPosition.X;
-            begin = (begin / Dimention);
 
-
-            foreach (var itemm in hotel._facilities)
+            foreach (LocationType item in hotel._facilities)
             {
-                //Dimention = itemm.Dimension.X * 160;
-                if (begin == itemm.Position.X)
+
+                if (item.Position.X == 9 && item.Position.Y == 1)
                 {
-                    paper.label1.Text = itemm.AreaType;
-                    paper.Visible = true;
-                    break;
+                    listBox1.Items.Add(item.neighBor.Count());
+                    listBox1.Items.Add(item.AreaType);
                 }
             }
-            label1.Text = begin.ToString();
+            Console.ReadLine();
+        }
+        Rectangle rec;
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Dictionary<LocationType, Rectangle> location = new Dictionary<LocationType, Rectangle>();
+            Point point = new Point(e.Location.X - hotel._hotelPosition.X, hotel._heightHotel - e.Location.Y + hotel._hotelPosition.Y);
+
+            foreach (var item in hotel._facilities)
+            {
+                rec = new Rectangle(item.Position.X * item.Width, item.Position.Y * item.Height, item.Dimension.X * item.Width, item.Dimension.Y * item.Height);
+                location.Add(item, rec);
+            }
+
+            foreach (var item in location)
+            {
+                if (point.X >= item.Value.X && point.X <= (item.Value.X + item.Value.Width) && point.Y >= item.Value.Y && point.Y <= (item.Value.Y + item.Value.Height))
+                {
+                    if (item.Key.AreaType.Equals("Cinema") || item.Key.AreaType.Equals("Fitness"))
+                    {
+                        paper.label1.Text = item.Key.AreaType;
+                        break;
+                    }
+                    else if (item.Key.AreaType.Equals("Room"))
+                    {
+                        paper.label1.Text = item.Key.AreaType;
+                        break;
+                    }
+                    else if (item.Key.AreaType.Equals("Restaurant"))
+                    {
+                        paper.label1.Text = item.Key.AreaType;
+                        paper.label5.Text = ((item.Key) as Restaurant).Capacity.ToString();
+                        break;
+                    }
+                    else if (item.Key.AreaType.Equals("Lobby"))
+                    {
+                        paper.label1.Text = item.Key.AreaType;
+                        paper.label5.Text = ((item.Key) as Lobby).Capacity.ToString();
+                        break;
+                    }
+                    else if (item.Key.AreaType.Equals("ElevatorHall"))
+                    {
+                        paper.label1.Text = item.Key.AreaType;
+                        break;
+                    }
+                    else if (item.Key.AreaType.Equals("Elevator"))
+                    {
+                        paper.label1.Text = item.Key.AreaType;
+                        break;
+                    }
+                    else if (item.Key.AreaType.Equals("Staircase"))
+                    {
+                        paper.label1.Text = item.Key.AreaType;
+                        break;
+                    }
+                    else
+                    {
+                        paper.label1.Text = item.Key.AreaType;
+                        break;
+                    }
+                }
+            }
+            paper.Visible = true;
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -71,7 +122,7 @@ namespace HotelSimulatie
             {
                 using (Graphics Canvas = Graphics.FromImage(WorldBitmap))
                 {
-                    Canvas.DrawImage(item.Image, item.Position.X * 160, item.Position.Y * - 120, item.Dimension.X * 160, item.Dimension.Y * 120);
+                    Canvas.DrawImage(item.Image, item.Position.X * item.Width, WorldBitmap.Height - (item.Position.Y * item.Height) - item.Dimension.Y * item.Height, item.Dimension.X * item.Width, item.Dimension.Y * item.Height);
                 }
             }
             e.Graphics.DrawImage(WorldBitmap, hotel._hotelPosition);

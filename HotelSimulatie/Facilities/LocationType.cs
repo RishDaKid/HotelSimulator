@@ -15,12 +15,15 @@ namespace HotelSimulatie.Facilities
         public Point Position { get; set; }
         public Point Dimension { get; set; }
         public string AreaType { get; set; }
-
+        public int Height { get; set; }
+        public int Width { get; set; }
         public Dictionary<LocationType, int> neighBor;
 
         public LocationType()
         {
             neighBor = new Dictionary<LocationType, int>();
+            Height = 120;
+            Width = 160;
         }
 
     }

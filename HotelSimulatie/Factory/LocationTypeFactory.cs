@@ -9,7 +9,7 @@ namespace HotelSimulatie.Factory
 {
     abstract class LocationTypeFactory
     {
-        public abstract LocationType Create(string locationType);
+        public abstract LocationType Create(Facility facilityModel);
 
     }
 }

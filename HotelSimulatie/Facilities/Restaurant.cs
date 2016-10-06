@@ -12,8 +12,9 @@ namespace HotelSimulatie.Facilities
     {
         public int Capacity { get; set; }
 
-        public Restaurant()
+        public Restaurant(int _capacity)
         {
+            Capacity = _capacity;
             Image = Image.FromFile("../../Resources/restaurant.png");
         }
     }
