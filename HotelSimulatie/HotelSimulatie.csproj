@@ -68,6 +68,7 @@
     <Compile Include="Factory\RestaurantFactory.cs" />
     <Compile Include="Factory\RoomFactory.cs" />
     <Compile Include="Factory\StaircaseFactory.cs" />
+    <Compile Include="FileHandling\FileWriter.cs" />
     <Compile Include="GUI\ObjectInformationPaper.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -83,7 +84,7 @@
     <Compile Include="Facilities\Restaurant.cs" />
     <Compile Include="Facilities\Room.cs" />
     <Compile Include="Facilities\Staircase.cs" />
-    <Compile Include="FileReader.cs" />
+    <Compile Include="FileHandling\FileReader.cs" />
     <Compile Include="Graph\CopyNode.cs" />
     <Compile Include="Graph\Node.cs" />
     <Compile Include="GUI\MainScreen.cs">

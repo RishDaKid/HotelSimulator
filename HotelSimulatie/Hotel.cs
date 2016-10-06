@@ -9,42 +9,30 @@ using System.Threading.Tasks;
 using HotelSimulatie.Factory;
 using System.Windows.Forms;
 
+
+
 namespace HotelSimulatie
 {
-    class Hotel
+    public class Hotel
     {
-        private List<LocationType> facilities;
-        private List<LocationType> rooms;
-        private Point hotelPosition;
-        private int heightHotel;
-        private int widthHotel;
-
-        public int _heightHotel { get { return heightHotel; } set { } }
-        public int _widthHotel { get { return widthHotel; } set { } }
-        public Point _hotelPosition { get { return hotelPosition; } set { } }
-        public List<LocationType> _facilities
-        {
-            get { return facilities; }
-            set { }
-        }
-        public List<LocationType> _rooms
-        {
-            get { return rooms; }
-            set { }
-        }
+        public int HotelHeight { get; set; }
+        public int HotelWidth { get; set; }
+        public Point HotelPosition { get; set; }
+        public List<LocationType> Facilities { get; set; }
+        public List<LocationType> Rooms { get; set; }
 
         public Hotel()
         {
-            hotelPosition = new Point(160, 182);
-            heightHotel = 834;
-            widthHotel = 1600;
-            facilities = new List<LocationType>();
-            rooms = new List<LocationType>();
-            CreateFactorys();
+            HotelPosition = new Point(160, 182);
+            HotelHeight = 834;
+            HotelWidth = 1600;
+            Facilities = new List<LocationType>();
+            Rooms = new List<LocationType>();
+            CreateFactories();
             LinkLocationTypes();
         }
 
-        public void CreateFactorys()
+        private void CreateFactories()
         {
             CinemaFactory cinemaFactory = new CinemaFactory();
             FitnessFactory fitnessFactory = new FitnessFactory();
@@ -60,12 +48,11 @@ namespace HotelSimulatie
             CreateFactoryObjects(movableFactory);
         }
 
-        public void CreateFactoryObjects(MovableFactory movableFactory)
+        private void CreateFactoryObjects(MovableFactory movableFactory)
         {
-            // Create Objects with facility model
             FileReader fileReader = new FileReader();
+            // Create Objects with facility model
             List<Facility> facilitiesModels = fileReader.ReadLayoutFile();
-            
 
             foreach (var item in facilitiesModels)
             {
@@ -73,16 +60,15 @@ namespace HotelSimulatie
                 locationType.AreaType = item.AreaType;
                 locationType.Dimension = item.Dimension;
                 locationType.Position = item.Position;
-                facilities.Add(locationType);
+                Facilities.Add(locationType);
             }
-
 
             // Create Objects which are not facility models
             Lobby lobby = new Lobby();
             lobby.AreaType = "Lobby";
             lobby.Position = new Point(1, 0);
             lobby.Dimension = new Point(8, 1);
-            facilities.Add(lobby);
+            Facilities.Add(lobby);
 
             int etageStair = 0;
             for (int i = 0; i < 7; i++)
@@ -91,7 +77,7 @@ namespace HotelSimulatie
                 stairCase.AreaType = "Staircase";
                 stairCase.Position = new Point(9, etageStair);
                 stairCase.Dimension = new Point(1, 1);
-                facilities.Add(stairCase);
+                Facilities.Add(stairCase);
                 etageStair++;
             }
 
@@ -102,7 +88,7 @@ namespace HotelSimulatie
                 elevatorHall.AreaType = "ElevatorHall";
                 elevatorHall.Position = new Point(0, etageElevator);
                 elevatorHall.Dimension = new Point(1, 1);
-                facilities.Add(elevatorHall);
+                Facilities.Add(elevatorHall);
                 etageElevator++;
             }
 
@@ -110,24 +96,25 @@ namespace HotelSimulatie
             elevator.AreaType = "Elevator";
             elevator.Position = new Point(0, 0);
             elevator.Dimension = new Point(1, 1);
-            facilities.Add(elevator);
+            Facilities.Add(elevator);
             etageElevator++;
 
-            foreach (var item in rooms)
+            foreach (var item in Rooms)
             {
-                facilities.Add(item);
+                Facilities.Add(item);
             }
         }
 
-        LocationType current;
-        LocationType next;
-        public void LinkLocationTypes()
+        private void LinkLocationTypes()
         {
-            int maxHeightHotel = facilities.Max(element => Math.Abs(element.Position.Y)); // get the max height from hotel that is : the position.Y = 6
-            int maxWidthHotel = facilities.Max(element => Math.Abs(element.Position.X)); // get the max with from hotel that is : the position.X = 9
-            int minWidthHotel = facilities.Min(element => Math.Abs(element.Position.X)); // get the minimum width from hotel that is : the position.X = 0
-            int minHeightHotel = facilities.Min(element => Math.Abs(element.Position.Y)); // get the minimum height from hotel that is : the position.Y = 0
-            int maxDimentionLocationType = facilities.Max(element => Math.Abs(element.Dimension.X)); // get the location type with the biggest dimention.X = 8;
+            LocationType current = new LocationType();
+            LocationType next = new LocationType();
+
+            int maxHeightHotel = Facilities.Max(element => Math.Abs(element.Position.Y)); // get the max height from hotel that is : the position.Y = 6
+            int maxWidthHotel = Facilities.Max(element => Math.Abs(element.Position.X)); // get the max with from hotel that is : the position.X = 9
+            int minWidthHotel = Facilities.Min(element => Math.Abs(element.Position.X)); // get the minimum width from hotel that is : the position.X = 0
+            int minHeightHotel = Facilities.Min(element => Math.Abs(element.Position.Y)); // get the minimum height from hotel that is : the position.Y = 0
+            int maxDimentionLocationType = Facilities.Max(element => Math.Abs(element.Dimension.X)); // get the location type with the biggest dimention.X = 8;
 
 
             for (int heightHotel = minHeightHotel; heightHotel <= maxHeightHotel; heightHotel++) // Count from (min floor) till max height (max floor)
@@ -160,16 +147,15 @@ namespace HotelSimulatie
                                 if (next != null)
                                 {
                                     current.neighBor.Add(next, 1);
-                                    next.neighBor.Add(current, 1);
+                                   // next.neighBor.Add(current, 1);
                                 }
                                 next = SearchLocationType(current.Position.X, current.Position.Y - 1);
                                 if (next != null)
                                 {
                                     current.neighBor.Add(next, 1);
-                                    next.neighBor.Add(current, 1);
+                                    //next.neighBor.Add(current, 1);
                                 }
                             }
-
                             next = null; // next becomes null, we 
                         }
                     }
@@ -182,7 +168,7 @@ namespace HotelSimulatie
         {
             Point point = new Point(xPos, yPos);
 
-            foreach (LocationType item in facilities) // Search the cacilities list
+            foreach (LocationType item in Facilities) // Search the cacilities list
             {
                 if (item.Position == point) // When the position in the list is the same as the position we gave it to here
                 {

@@ -10,11 +10,11 @@ namespace HotelSimulatie.Factory
     class MovableFactory
     {
         /// <summary>All the factories registered to this abstract factory. Key = factoryType, Value = the factory itself</summary>
-        private Dictionary<string, LocationTypeFactory> _factories;
+        private Dictionary<string, LocationTypeFactory> factories;
 
         public MovableFactory()
         {
-            _factories = new Dictionary<string, LocationTypeFactory>();
+            factories = new Dictionary<string, LocationTypeFactory>();
         }
 
         /// <summary>
@@ -25,18 +25,18 @@ namespace HotelSimulatie.Factory
         /// <returns>A new instance of <see cref="IMovableThing"/>, or null if the parameters are incorrect</returns>
         public LocationType Create(Facility layout)
         {
-            if (_factories.ContainsKey(layout.AreaType))
-                return _factories[layout.AreaType].Create(layout);
+            if (factories.ContainsKey(layout.AreaType))
+                return factories[layout.AreaType].Create(layout);
 
             return null;
         }
 
         public bool RegisterFactory(string type, LocationTypeFactory newFactory)
         {
-            if (_factories.ContainsKey(type))
+            if (factories.ContainsKey(type))
                 return false;
 
-            _factories.Add(type, newFactory);
+            factories.Add(type, newFactory);
             return true;
         }
     }

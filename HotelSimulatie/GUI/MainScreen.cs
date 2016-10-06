@@ -36,15 +36,15 @@ namespace HotelSimulatie
             paper.Location = new Point(1480, 0);
             paper.Visible = false;
 
-            WorldBitmap = new Bitmap(hotel._widthHotel, hotel._heightHotel);
+            WorldBitmap = new Bitmap(hotel.HotelWidth, hotel.HotelHeight);
             this.MouseClick += Form1_MouseClick;
 
             this.Paint += Form1_Paint;
 
-            foreach (LocationType item in hotel._facilities)
+            foreach (LocationType item in hotel.Facilities)
             {
 
-                if (item.Position.X == 9 && item.Position.Y == 1)
+                if (item.Position.X == 9 && item.Position.Y == 6)
                 {
                     listBox1.Items.Add(item.neighBor.Count());
                     listBox1.Items.Add(item.AreaType);
@@ -57,9 +57,9 @@ namespace HotelSimulatie
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
             Dictionary<LocationType, Rectangle> location = new Dictionary<LocationType, Rectangle>();
-            Point point = new Point(e.Location.X - hotel._hotelPosition.X, hotel._heightHotel - e.Location.Y + hotel._hotelPosition.Y);
+            Point point = new Point(e.Location.X - hotel.HotelPosition.X, hotel.HotelHeight - e.Location.Y + hotel.HotelPosition.Y);
 
-            foreach (var item in hotel._facilities)
+            foreach (var item in hotel.Facilities)
             {
                 rec = new Rectangle(item.Position.X * item.Width, item.Position.Y * item.Height, item.Dimension.X * item.Width, item.Dimension.Y * item.Height);
                 location.Add(item, rec);
@@ -118,14 +118,14 @@ namespace HotelSimulatie
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            foreach (var item in hotel._facilities)
+            foreach (var item in hotel.Facilities)
             {
                 using (Graphics Canvas = Graphics.FromImage(WorldBitmap))
                 {
                     Canvas.DrawImage(item.Image, item.Position.X * item.Width, WorldBitmap.Height - (item.Position.Y * item.Height) - item.Dimension.Y * item.Height, item.Dimension.X * item.Width, item.Dimension.Y * item.Height);
                 }
             }
-            e.Graphics.DrawImage(WorldBitmap, hotel._hotelPosition);
+            e.Graphics.DrawImage(WorldBitmap, hotel.HotelPosition);
         }
         private void bSettings_Click(object sender, EventArgs e)
         {

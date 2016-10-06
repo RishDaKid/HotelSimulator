@@ -10,17 +10,19 @@ using System.Windows.Forms;
 //using Newtonsoft.Json;
 using HotelSimulatie.Model;
 using System.IO;
+using HotelSimulatie.FileHandeling;
 
 namespace HotelSimulatie.GUI
 {
     public partial class SettingsScreen : UserControl
     {
         FileReader fileReader;
-
+        FileWriter fileWriter;
         public SettingsScreen()
         {
             InitializeComponent();
             fileReader = new FileReader();
+            fileWriter = new FileWriter();
 
             // Scheelt werk bij testen
             comboBox1.Text = "1";
@@ -34,13 +36,13 @@ namespace HotelSimulatie.GUI
 
         private void buConfirm_Click(object sender, EventArgs e)
         {
-            WriteFile();
+            SaveSettings();
         }
 
         /// <summary>
         /// Schrijft de ingevulde gegevens naar een settings bestand.
         /// </summary>
-        private void WriteFile()
+        private void SaveSettings()
         {
             Settings settings = new Settings();
             settings.StairsTimeUnit = Convert.ToInt32(tbStairs.Text) * Convert.ToInt32(comboBox1.Text);
@@ -50,12 +52,12 @@ namespace HotelSimulatie.GUI
             settings.CleaningTimeUnit = Convert.ToInt32(tbCleaning.Text) * Convert.ToInt32(comboBox1.Text);
             settings.CleaningEmergengyTimeUnit = Convert.ToInt32(tbCleaningEmergency.Text) * Convert.ToInt32(comboBox1.Text);
 
-            //fileReader.WriteFile(settings);
+            fileWriter.WriteFile(settings);
         }
 
         private void bConfirm_Click_1(object sender, EventArgs e)
         {
-            WriteFile();
+            SaveSettings();
             Visible = false;
         }
 

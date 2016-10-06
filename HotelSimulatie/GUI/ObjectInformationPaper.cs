@@ -18,7 +18,6 @@ namespace HotelSimulatie.GUI
         {
             InitializeComponent();
             pictureBox1.MouseClick += PictureBox1_MouseClick;
-
         }
 
         private void PictureBox1_MouseClick(object sender, MouseEventArgs e)

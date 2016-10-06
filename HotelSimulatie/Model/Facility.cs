@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelSimulatie.Facilities
 {
-    class Facility
+    public class Facility
     {
         public int Capacity { get; set; }
         public string AreaType { get; set; }
