@@ -5,20 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using HotelSimulatie.Facilities;
 using HotelSimulatie.Graph;
+
 namespace HotelSimulatie.Actors
 {
-    class Visitor : Human
+    public class Visitor : Human
     {
         public LocationType Location { get; set; }
         public LocationType Destination { get; set; }
         public Room Room { get; set; }
         public List<LocationType> Facilities { get; set; }
         public PathFinding pathFinding { get; set; }
-        public VisitorGraph VisitorGraph { get; set; }
 
         public Visitor(List<LocationType> _facilities, PathFinding _pathFinding)
         {
-            VisitorGraph = new VisitorGraph();
             pathFinding = _pathFinding;
             Facilities = _facilities;
             CreatePath();
@@ -38,9 +37,9 @@ namespace HotelSimulatie.Actors
             // Mag zelf bepalen waar die naar toe gaat, hoeft dus niet te onthoude
             foreach (var destination in Facilities)
             {
-                if (destination.Position.X == 3 && destination.Position.Y == 1)
+                if (destination.Position.X == 4 && destination.Position.Y == 1)
                 {
-                    VisitorGraph.CreateNodeGraph(Location, destination, Facilities);
+                    pathFinding.CreateNodeGraph(Location, destination);
                 }
             }
         }

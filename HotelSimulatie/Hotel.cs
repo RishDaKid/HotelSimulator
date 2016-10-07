@@ -20,17 +20,22 @@ namespace HotelSimulatie
         public List<LocationType> Facilities { get; set; }
         public List<LocationType> Rooms { get; set; }
         public PathFinding pathFinding { get; set; }
-        public List<> MyProperty { get; set; }
+        public List<Visitor> Visitor { get; set; }
+
         public Hotel()
         {
             HotelPosition = new Point(160, 182);
             HotelHeight = 834;
             HotelWidth = 1600;
+
             Facilities = new List<LocationType>();
             Rooms = new List<LocationType>();
+            Visitor = new List<Visitor>();
+
             CreateFactories();
             LinkLocationTypes();
             pathFinding = new PathFinding(Facilities);
+            CreatVisitors();
         }
 
         private void CreateFactories()
@@ -47,12 +52,14 @@ namespace HotelSimulatie
             movableFactory.RegisterFactory("Room", roomFactory);
 
             CreateFactoryObjects(movableFactory);
+
         }
 
 
         public void CreatVisitors()
         {
             Visitor vi1 = new Visitor(Facilities, pathFinding);
+            Visitor.Add(vi1);
         }
 
         private void CreateFactoryObjects(MovableFactory movableFactory)
@@ -113,19 +120,19 @@ namespace HotelSimulatie
         // 
         private void LinkLocationTypes()
         {
-            LocationType current = new LocationType();
-            LocationType next = new LocationType();
+            LocationType current = null;
+            LocationType next = null;
 
-            int maxHeightHotel = Facilities.Max(element => Math.Abs(element.Position.Y)); // get the max height from hotel that is : the position.Y = 6
-            int maxWidthHotel = Facilities.Max(element => Math.Abs(element.Position.X)); // get the max with from hotel that is : the position.X = 9
-            int minWidthHotel = Facilities.Min(element => Math.Abs(element.Position.X)); // get the minimum width from hotel that is : the position.X = 0
-            int minHeightHotel = Facilities.Min(element => Math.Abs(element.Position.Y)); // get the minimum height from hotel that is : the position.Y = 0
-            int maxDimentionLocationType = Facilities.Max(element => Math.Abs(element.Dimension.X)); // get the location type with the biggest dimention.X = 8;
+            int maxYposHotel = Facilities.Max(element => element.Position.Y); // get the max height from hotel that is : the position.Y = 6
+            int maxXposHotel = Facilities.Max(element => element.Position.X); // get the max with from hotel that is : the position.X = 9
+            int minXposHotel = Facilities.Min(element => element.Position.X); // get the minimum width from hotel that is : the position.X = 0
+            int minYposHotel = Facilities.Min(element => element.Position.Y); // get the minimum height from hotel that is : the position.Y = 0
+            int biggestXdimention = Facilities.Max(element => element.Dimension.X); // get the location type with the biggest dimention.X = 8;
 
 
-            for (int heightHotel = minHeightHotel; heightHotel <= maxHeightHotel; heightHotel++) // Count from (min floor) till max height (max floor)
+            for (int heightHotel = minYposHotel; heightHotel <= maxYposHotel; heightHotel++) // Count from (min floor) till max height (max floor)
             {
-                for (int widthHotel = (minWidthHotel + 1); widthHotel <= maxWidthHotel; widthHotel++) // Count afther elevator collumn so, 1, till max (max collums) == 9
+                for (int widthHotel = (minXposHotel + 1); widthHotel <= maxXposHotel; widthHotel++) // Count afther elevator collumn so, 1, till max (max collums) == 9
                 {
                     if (current == null) // Current starts with zero
                     {
@@ -133,7 +140,8 @@ namespace HotelSimulatie
                     }
                     else
                     {
-                        for (int currentDimentionCount = (minWidthHotel + 1); currentDimentionCount <= maxDimentionLocationType; currentDimentionCount++) // Count from 1 till the widest locationType dimention == 8, to get the next item
+                        // miss biggestXdimention + 1
+                        for (int currentDimentionCount = (minXposHotel + 1); currentDimentionCount <= biggestXdimention; currentDimentionCount++) // Count from 1 till the widest locationType dimention == 8, to get the next item
                         {
                             next = SearchLocationType((current.Position.X + currentDimentionCount), current.Position.Y); // next becomes the next item. Example lobby : 1 + 8 = 9 (next is stairs)
                             if(next != null)
@@ -147,7 +155,7 @@ namespace HotelSimulatie
                             next.neighBor.Add(current, next.Position.X - current.Position.X); // add too the next item, the current item
                             current = next; // current becomes the next one, we now count from there
 
-                            if (current.Position.X == maxWidthHotel) // if position from current is 9
+                            if (current.Position.X == maxXposHotel) // if position from current is 9
                             {
                                 next = SearchLocationType(current.Position.X, current.Position.Y + 1);
                                 if (next != null)
@@ -160,11 +168,27 @@ namespace HotelSimulatie
                                     current.neighBor.Add(next, 1);
                                 }
                             }
-                            next = null; // next becomes null, we 
+
+                        }
+                        else
+                        {
+                            widthHotel = maxXposHotel;
                         }
                     }
                 }
                 current = null; // current should become null, because we want to give it a new position, one row higher
+            }
+            foreach (var item in Facilities)
+            {
+                Console.WriteLine();
+                Console.WriteLine(item.AreaType + " : " + item.Position);
+
+                foreach (var itemm in item.neighBor)
+                {
+                    Console.WriteLine(itemm.Key.AreaType + " : " + itemm.Key.Position);
+                }
+                Console.WriteLine();
+
             }
         }
 

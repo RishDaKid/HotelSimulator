@@ -44,7 +44,7 @@ namespace HotelSimulatie
             foreach (LocationType item in hotel.Facilities)
             {
 
-                if (item.Position.X == 9 && item.Position.Y == 6)
+                if (item.Position.X == 1 && item.Position.Y == 0)
                 {
                     listBox1.Items.Add(item.neighBor.Count());
                     listBox1.Items.Add(item.AreaType);

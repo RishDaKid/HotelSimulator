@@ -8,7 +8,7 @@ using HotelSimulatie.Factory;
 
 namespace HotelSimulatie.Facilities
 {
-    public class LocationType 
+    public abstract class LocationType 
     {
 
         public Image Image { get; set; }

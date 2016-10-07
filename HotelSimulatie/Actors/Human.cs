@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HotelSimulatie.Actors
 {
-    class Human
+    public class Human
     {
     }
 }

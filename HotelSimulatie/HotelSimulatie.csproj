@@ -69,7 +69,6 @@
     <Compile Include="Factory\RoomFactory.cs" />
     <Compile Include="Factory\StaircaseFactory.cs" />
     <Compile Include="FileHandling\FileWriter.cs" />
-    <Compile Include="Graph\VisitorGraph.cs" />
     <Compile Include="GUI\ObjectInformationPaper.cs">
       <SubType>UserControl</SubType>
     </Compile>
