@@ -20,7 +20,7 @@ namespace HotelSimulatie
         public List<LocationType> Facilities { get; set; }
         public List<LocationType> Rooms { get; set; }
         public PathFinding pathFinding { get; set; }
-
+        public List<> MyProperty { get; set; }
         public Hotel()
         {
             HotelPosition = new Point(160, 182);
@@ -47,6 +47,12 @@ namespace HotelSimulatie
             movableFactory.RegisterFactory("Room", roomFactory);
 
             CreateFactoryObjects(movableFactory);
+        }
+
+
+        public void CreatVisitors()
+        {
+            Visitor vi1 = new Visitor(Facilities, pathFinding);
         }
 
         private void CreateFactoryObjects(MovableFactory movableFactory)

@@ -53,11 +53,6 @@ namespace HotelSimulatie
             Console.ReadLine();
         }
 
-        public void CreatVisitors()
-        {
-            Visitor vi1 = new Visitor(hotel.Facilities, hotel.pathFinding);
-        }
-
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
             Rectangle rec = new Rectangle();
