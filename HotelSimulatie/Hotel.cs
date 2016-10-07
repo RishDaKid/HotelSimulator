@@ -8,8 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HotelSimulatie.Factory;
 using System.Windows.Forms;
-
-
+using HotelSimulatie.Graph;
 
 namespace HotelSimulatie
 {
@@ -20,6 +19,7 @@ namespace HotelSimulatie
         public Point HotelPosition { get; set; }
         public List<LocationType> Facilities { get; set; }
         public List<LocationType> Rooms { get; set; }
+        public DijkstraPathFinding pathFinding { get; set; }
 
         public Hotel()
         {
@@ -30,6 +30,7 @@ namespace HotelSimulatie
             Rooms = new List<LocationType>();
             CreateFactories();
             LinkLocationTypes();
+            pathFinding = new DijkstraPathFinding(Facilities);
         }
 
         private void CreateFactories()
@@ -62,7 +63,6 @@ namespace HotelSimulatie
                 locationType.Position = item.Position;
                 Facilities.Add(locationType);
             }
-
             // Create Objects which are not facility models
             Lobby lobby = new Lobby();
             lobby.AreaType = "Lobby";
@@ -104,7 +104,7 @@ namespace HotelSimulatie
                 Facilities.Add(item);
             }
         }
-
+        // 
         private void LinkLocationTypes()
         {
             LocationType current = new LocationType();
@@ -137,8 +137,8 @@ namespace HotelSimulatie
                         }
                         if (next != null) // When we found the next item, counting from current item
                         {
-                            current.neighBor.Add(next, 1); // add too the current item, the next item
-                            next.neighBor.Add(current, 1); // add too the next item, the current item
+                            current.neighBor.Add(next, next.Position.X - current.Position.X); // add too the current item, the next item
+                            next.neighBor.Add(current, next.Position.X - current.Position.X); // add too the next item, the current item
                             current = next; // current becomes the next one, we now count from there
 
                             if (current.Position.X == maxWidthHotel) // if position from current is 9
@@ -147,13 +147,11 @@ namespace HotelSimulatie
                                 if (next != null)
                                 {
                                     current.neighBor.Add(next, 1);
-                                   // next.neighBor.Add(current, 1);
                                 }
                                 next = SearchLocationType(current.Position.X, current.Position.Y - 1);
                                 if (next != null)
                                 {
                                     current.neighBor.Add(next, 1);
-                                    //next.neighBor.Add(current, 1);
                                 }
                             }
                             next = null; // next becomes null, we 

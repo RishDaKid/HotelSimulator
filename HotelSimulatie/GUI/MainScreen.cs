@@ -52,10 +52,15 @@ namespace HotelSimulatie
             }
             Console.ReadLine();
         }
-        Rectangle rec;
+
+        public void CreatVisitors()
+        {
+            Visitor vi1 = new Visitor(hotel.Facilities);
+        }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
+            Rectangle rec = new Rectangle();
             Dictionary<LocationType, Rectangle> location = new Dictionary<LocationType, Rectangle>();
             Point point = new Point(e.Location.X - hotel.HotelPosition.X, hotel.HotelHeight - e.Location.Y + hotel.HotelPosition.Y);
 
