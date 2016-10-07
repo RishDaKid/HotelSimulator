@@ -19,7 +19,7 @@ namespace HotelSimulatie
         public Point HotelPosition { get; set; }
         public List<LocationType> Facilities { get; set; }
         public List<LocationType> Rooms { get; set; }
-        public DijkstraPathFinding pathFinding { get; set; }
+        public PathFinding pathFinding { get; set; }
 
         public Hotel()
         {
@@ -30,7 +30,7 @@ namespace HotelSimulatie
             Rooms = new List<LocationType>();
             CreateFactories();
             LinkLocationTypes();
-            pathFinding = new DijkstraPathFinding(Facilities);
+            pathFinding = new PathFinding(Facilities);
         }
 
         private void CreateFactories()

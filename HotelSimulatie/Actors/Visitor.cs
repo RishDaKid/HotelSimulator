@@ -13,9 +13,13 @@ namespace HotelSimulatie.Actors
         public LocationType Destination { get; set; }
         public Room Room { get; set; }
         public List<LocationType> Facilities { get; set; }
+        public PathFinding pathFinding { get; set; }
+        public VisitorGraph VisitorGraph { get; set; }
 
-        public Visitor(List<LocationType> _facilities)
+        public Visitor(List<LocationType> _facilities, PathFinding _pathFinding)
         {
+            VisitorGraph = new VisitorGraph();
+            pathFinding = _pathFinding;
             Facilities = _facilities;
             CreatePath();
         }
@@ -36,7 +40,7 @@ namespace HotelSimulatie.Actors
             {
                 if (destination.Position.X == 3 && destination.Position.Y == 1)
                 {
-                    pathFinding.CreateNodeGraph(Location, destination);
+                    VisitorGraph.CreateNodeGraph(Location, destination, Facilities);
                 }
             }
         }
