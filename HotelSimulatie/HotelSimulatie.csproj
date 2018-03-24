@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HotelEvents, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dllBestanden\HotelEvents.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -52,23 +56,42 @@
   <ItemGroup>
     <Compile Include="Actors\Cleaner.cs" />
     <Compile Include="Actors\Human.cs" />
-    <Compile Include="Actors\Receptionist.cs" />
+    <Compile Include="Actors\MovableCreature.cs" />
     <Compile Include="Actors\Visitor.cs" />
+    <Compile Include="Enums\Direction.cs" />
+    <Compile Include="Enums\EatingStatus.cs" />
+    <Compile Include="Enums\InteractStatus.cs" />
+    <Compile Include="Enums\OpenClosedStatus.cs" />
+    <Compile Include="Enums\StatusCleaner.cs" />
+    <Compile Include="Enums\StatusHuman.cs" />
+    <Compile Include="Enums\StatusMonster.cs" />
+    <Compile Include="Enums\WalkingStatus.cs" />
+    <Compile Include="Facilities\CreatableObject.cs" />
+    <Compile Include="Facilities\Pool.cs" />
+    <Compile Include="Factory\ConcreteCreatableObjectFactory.cs" />
+    <Compile Include="Factory\ConcreteMovableCreaturesFactory.cs" />
+    <Compile Include="Factory\AbstractFactory.cs" />
+    <Compile Include="Factory\IFactory.cs" />
+    <Compile Include="GUI\Manual.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Manual.Designer.cs">
+      <DependentUpon>Manual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\StartScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\StartScreen.Designer.cs">
+      <DependentUpon>StartScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\IListener.cs" />
+    <Compile Include="Interfaces\INotifier.cs" />
+    <Compile Include="Manage\ManageCleaner.cs" />
     <Compile Include="Facilities\LocationType.cs" />
     <Compile Include="Facilities\Cinema.cs" />
-    <Compile Include="Facilities\ElevatorHall.cs" />
-    <Compile Include="Facilities\Empty.cs" />
-    <Compile Include="Factory\CinemaFactory.cs" />
-    <Compile Include="Factory\ElevatorFactory.cs" />
-    <Compile Include="Factory\ElevatorHallFactory.cs" />
-    <Compile Include="Factory\FitnessFactory.cs" />
-    <Compile Include="Factory\LobbyFactory.cs" />
-    <Compile Include="Factory\LocationTypeFactory.cs" />
-    <Compile Include="Factory\MovableFactory.cs" />
-    <Compile Include="Factory\RestaurantFactory.cs" />
-    <Compile Include="Factory\RoomFactory.cs" />
-    <Compile Include="Factory\StaircaseFactory.cs" />
+    <Compile Include="Facilities\ElevatorShaft.cs" />
     <Compile Include="FileHandling\FileWriter.cs" />
+    <Compile Include="Graph\Graph.cs" />
     <Compile Include="GUI\ObjectInformationPaper.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -77,8 +100,7 @@
     </Compile>
     <Compile Include="Hotel.cs" />
     <Compile Include="Model\Facility.cs" />
-    <Compile Include="Facilities\Fitnesscentrum.cs" />
-    <Compile Include="Facilities\Hallway.cs" />
+    <Compile Include="Facilities\Fitness.cs" />
     <Compile Include="Facilities\Elevator.cs" />
     <Compile Include="Facilities\Lobby.cs" />
     <Compile Include="Facilities\Restaurant.cs" />
@@ -99,18 +121,27 @@
     <Compile Include="GUI\SettingsScreen.Designer.cs">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\MovableParam.cs" />
     <Compile Include="Model\Settings.cs" />
+    <Compile Include="Monster\Godzilla.cs" />
+    <Compile Include="Monster\Monster.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GUI\Tiles.cs" />
+    <Compile Include="Request.cs" />
     <EmbeddedResource Include="GUI\MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Manual.resx">
+      <DependentUpon>Manual.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ObjectInformationPaper.resx">
       <DependentUpon>ObjectInformationPaper.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\SettingsScreen.resx">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\StartScreen.resx">
+      <DependentUpon>StartScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -120,6 +151,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -135,8 +167,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <None Include="Resources\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

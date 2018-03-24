@@ -1,0 +1,136 @@
+
+Direction before sort: NONE
+Before sort: 
+NONE, 37
+
+
+After sort: 
+NONE, 37
+
+Direction after sort: DOWN
+
+Direction before sort: DOWN
+Before sort: 
+NONE, 37
+NONE, 98
+
+
+After sort: 
+NONE, 37
+NONE, 98
+
+Direction after sort: DOWN
+
+Direction before sort: DOWN
+Before sort: 
+NONE, 37
+NONE, 98
+NONE, 122
+
+
+After sort: 
+NONE, 37
+NONE, 98
+NONE, 122
+
+Direction after sort: DOWN
+
+Direction before sort: DOWN
+Before sort: 
+NONE, 37
+NONE, 98
+NONE, 122
+NONE, 183
+
+
+After sort: 
+NONE, 37
+NONE, 98
+NONE, 122
+NONE, 183
+
+Direction after sort: DOWN
+
+Direction before sort: DOWN
+Before sort: 
+NONE, 37
+NONE, 98
+NONE, 122
+NONE, 183
+NONE, 14
+
+
+After sort: 
+NONE, 37
+NONE, 14
+NONE, 98
+NONE, 122
+NONE, 183
+
+Direction after sort: DOWN
+
+Direction before sort: DOWN
+Before sort: 
+NONE, 37
+NONE, 14
+NONE, 98
+NONE, 122
+NONE, 183
+NONE, 124
+
+
+After sort: 
+NONE, 37
+NONE, 14
+NONE, 98
+NONE, 122
+NONE, 124
+NONE, 183
+
+Direction after sort: DOWN
+
+Direction before sort: DOWN
+Before sort: 
+NONE, 37
+NONE, 14
+NONE, 98
+NONE, 122
+NONE, 124
+NONE, 183
+NONE, 67
+
+
+After sort: 
+NONE, 37
+NONE, 14
+NONE, 67
+NONE, 98
+NONE, 122
+NONE, 124
+NONE, 183
+
+Direction after sort: DOWN
+
+Direction before sort: DOWN
+Before sort: 
+NONE, 37
+NONE, 14
+NONE, 67
+NONE, 98
+NONE, 122
+NONE, 124
+NONE, 183
+NONE, 65
+
+
+After sort: 
+NONE, 37
+NONE, 14
+NONE, 65
+NONE, 67
+NONE, 98
+NONE, 122
+NONE, 124
+NONE, 183
+
+Direction after sort: DOWN

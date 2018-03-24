@@ -10,12 +10,27 @@ namespace HotelSimulatie.Facilities
 {
     class Staircase : LocationType
     {
-        List<Visitor> Guests;
-        public Staircase()
+        public Staircase(Facility specs) : base(specs)
         {
-            Guests = new List<Visitor>();
+            Image = Image.FromFile("../../Resources/stairs.png");
 
-            Image = Image.FromFile("../../Resources/staircase.png");
+        }
+
+        /// <summary>
+        /// If we want human to interact with the stairs
+        /// </summary>
+        /// <param name="human"></param>
+        public override void Interact(Human human)
+        {
+            JoinFacility(human);
+        }
+
+        /// <summary>
+        /// Updating this object based on the gameloop
+        /// </summary>
+        /// <param name="drawUpdateTime"></param>
+        public override void Update(double drawUpdateTime)
+        {
         }
     }
 }

@@ -13,6 +13,7 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
+            HotelEvents.HotelEventManager.Stop();
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -28,51 +29,48 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.bSettings = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.count = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // bSettings
+            // count
             // 
-            this.bSettings.Location = new System.Drawing.Point(1, -3);
-            this.bSettings.Margin = new System.Windows.Forms.Padding(2);
-            this.bSettings.Name = "bSettings";
-            this.bSettings.Size = new System.Drawing.Size(100, 37);
-            this.bSettings.TabIndex = 0;
-            this.bSettings.Text = "Menu";
-            this.bSettings.UseVisualStyleBackColor = true;
-            this.bSettings.Click += new System.EventHandler(this.bSettings_Click);
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(99, 0);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(247, 30);
-            this.listBox1.TabIndex = 1;
+            this.count.AutoSize = true;
+            this.count.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.count.Location = new System.Drawing.Point(1689, 19);
+            this.count.Name = "count";
+            this.count.Size = new System.Drawing.Size(35, 37);
+            this.count.TabIndex = 9;
+            this.count.Text = "0";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1309, 654);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.bSettings);
+            this.ClientSize = new System.Drawing.Size(1745, 805);
+            this.Controls.Add(this.count);
             this.DoubleBuffered = true;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            //this.DoubleClick += new System.EventHandler(this.Form1_DoubleClick);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDoubleClick);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button bSettings;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label count;
     }
 }
 
