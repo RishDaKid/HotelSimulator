@@ -22,7 +22,7 @@ namespace HotelSimulatie.Graph
         public Node()
         {
             Neighbors = new Dictionary<Node, int>(); // voor de buren
-            Previous = null; // we hebben nog geen enkel pad gevonden
+            Previous = null; // We hebben nog geen enkel pad gevonden
             Distance = Int32.MaxValue / 2; 
         }
 
