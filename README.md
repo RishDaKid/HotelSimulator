@@ -1,7 +1,1 @@
-# HotelSim
-
-Murat:
-CopyNode
-
-Tony:
-Andere classes
+Just a hotel simulation that I have created : )
